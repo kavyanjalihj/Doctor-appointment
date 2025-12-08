@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Appointments</title>
+</head>
+<body>
+    <h2>Doctors and Slots</h2>
+    {% for doctor in doctors %}
+        <h3>{{ doctor.name }} - {{ doctor.specialization }}</h3>
+        <ul>
+            {% for slot in doctor.slot_set.all %}
+                <li>
+                    {{ slot.date }} {{ slot.time }}
+                    {% if not slot.is_booked %}
+                        <a href="{% url 'book_slot' slot.id %}">Book</a>
+                    {% else %}
+                        Booked
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>
